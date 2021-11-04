@@ -1,0 +1,63 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  }
+
+.article {
+    display: flex;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 5%;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fff;
+  background-image: url("https://www.transparenttextures.com/patterns/axiom-pattern.png");
+  }
+
+#left {
+  width: 140px;
+  padding-right: 75px;
+}
+
+#right {
+  width: 140px;
+  text-align: right;
+  padding-left: 75px;
+}
+
+.alt {
+  text-align: right;
+}
+
+#me {
+    width: 70%;
+  }
+
+.MuiCard-root{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+.menu-head {
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.filter-option {
+  background-color: #EAEAEA;
+  }
+
+.menu-item {
+  background-color: #08D9D6;
+}
+
+.padding-rm {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.btn {
+  margin-left: 10px;
+}
+
