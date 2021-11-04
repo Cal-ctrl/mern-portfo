@@ -4,6 +4,8 @@ import dotenv from "dotenv"
 import ProjectsDAO from "./dao/projectsDAO.js"
 import AllergyDAO from "./dao/allergyDAO.js"
 import path from "path"
+import express from "express";
+
 dotenv.config()
 
 const MongoClient = mongodb.MongoClient
