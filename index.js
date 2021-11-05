@@ -24,10 +24,16 @@ MongoClient.connect(
 
     //server static assets if in production
     if (process.env.NODE_ENV === "production") {
-        app.use(express.static(`client/build`));
+        console.log("In production");
+        console.log(path.resolve(`client/build`));
+        app.use(express.static(path.resolve(`client/build`)));
 
         app.get("*", (req, res) => {
-            res.sendFile(path.resolve("client/build/index.html"));
+            
+            try{res.sendFile(path.resolve("client/build/index.html"));
+        } catch(e){
+            console.log(e);
+        }
         });
 
         
