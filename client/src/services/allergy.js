@@ -3,15 +3,15 @@ import http from "../http-common"
 
 class AllergyDataService {
     getAllAllergy(){
-        return http.get("/allergy")
+        return http.get("/api/v1/projects/allergy")
     }
     get(id){
-        return http.get(`/allergy?id=${id}`)
+        return http.get(`/api/v1/projects/allergy?id=${id}`)
     }
 
     createFoodItem(data, token){
         http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        return http.post("/allergy", data)
+        return http.post("/api/v1/projects/allergy", data)
     }
 
     find(query, page = 0) {
@@ -29,27 +29,27 @@ class AllergyDataService {
         }
         })
         console.log(string);
-        return http.get(`/allergy?${string}`);
+        return http.get(`/api/v1/projects/allergy?${string}`);
       } 
 
     updateFoodItem(data, token) {
         http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-        return http.put("/allergy", data)
+        return http.put("/api/v1/projects/allergy", data)
     }
 
     deleteFoodItem(id, token) {
         // const axiosConfig = {headers: {Authorisation = `Bearer ${token}`}}
         http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        return http.delete(`/allergy?id=${id}`)
+        return http.delete(`/api/v1/projects/allergy?id=${id}`)
     }
 
     sendSelected(data) {
         console.log(data);
-        return http.post("/download", data)
+        return http.post("/api/v1/projects/download", data)
     }
     downloadSelected() {
-        return http.get("/download", {responseType: "blob"});
+        return http.get("/api/v1/projects/download", {responseType: "blob"});
     }
 }
 

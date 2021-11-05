@@ -3,23 +3,23 @@ import http from "../http-common"
 
 class ProjectDataService {
     getAll() {
-        return http.get()
+        return http.get(`/api/v1/projects`)
     }
 
     find(query, by = "name") {
-        return http.get(`?${by}=${query}`)
+        return http.get(`/api/v1/projects?${by}=${query}`)
     }
 
     createProject(data){
-        return http.post("/projects", data)
+        return http.post("/api/v1/projects/projects", data)
     }
 
     updateProject(data) {
-        return http.put("/projects", data)
+        return http.put("/api/v1/projects/projects", data)
     }
 
     deleteProject(id) {
-        return http.delete(`/projects?id=${id}`)
+        return http.delete(`/api/v1/projects/projects?id=${id}`)
     }
 }
 

@@ -8,7 +8,7 @@ function Profile(){
     name:"About Me",
     className: "article",
     id: "me",
-    img: "images/Profile Photo1.png",
+    img: "images/Profile-Photo1.png",
     content: "I started my career as a team member in Cineworld Sheffield after completing a 3Bsc Mathematics with Education Degree. I have been honing my management and leadership skills to become a Deputy General Manager at Cineworld Sheffield. I started programming in 2020 as a lockdown hobbie, I have always wanted to learn and develope programming skills, I have completed courses in python, html, css js, node & node express, MongoDB, REACT and more",
     
   }
