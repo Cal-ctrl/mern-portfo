@@ -1,6 +1,7 @@
 import {Parser} from "json2csv";
 import fs from "fs";
 import Excel from "exceljs";
+import path from "path";
 
 
 function convertToCsv(jsobject) {
@@ -43,7 +44,7 @@ async function writeToXlsx(jsobject) {
     await templateWorkbook.xlsx.writeFile("./test3.xlsx");
 }
 
-
+// console.log(path.resolve("client/schema.js"));
 // writeToXlsx(schema)
 
 
