@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import projects from "./api/portfo.route.js";
+import path from "path";
 import { URL } from 'url'; // in Browser, the URL in native accessible on window
 const __dirname = new URL('.', import.meta.url).pathname;
 
@@ -15,10 +16,8 @@ app.use("/api/v1/projects", projects)
 
     //server static assets if in production
     if (process.env.NODE_ENV === "production") {
-        console.log("In production");
-        console.log(path.resolve(`client/build`));
 
-        app.use(express.static(path.resolve(__dirname + `client/build`)));
+        app.use(express.static(path.resolve(__dirname, `client/build`)));
 
         app.get("*", (req, res) => {
             res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
