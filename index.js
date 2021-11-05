@@ -31,11 +31,11 @@ MongoClient.connect(
         console.log("In production");
         console.log(path.resolve(`client/build`));
 
-        app.use(express.static(__dirname + `client/build`));
+        app.use(express.static(path.resolve(__dirname + `client/build`)));
 
         app.get("*", (req, res) => {
             
-            try{res.sendFile(__dirname + "client/build/index.html");
+            try{res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
         } catch(e){
             console.log(e);
         }
