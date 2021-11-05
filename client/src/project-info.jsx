@@ -3,7 +3,7 @@ const projectInfo = [
     {
         name: "Unlimited Thinking",
         img: "images/unlimited-img.png",
-        about: "An app created to promote the value of the Unlimited Card. Using the upcoming films, the app will serve up to the client a variety of films over the next 3 months and calculate if having subscription cinema is ogod value for them",
+        about: "An app created to promote the value of the Unlimited Card. Using the upcoming films, the app will serve up to the client a variety of films over the next 3 months and calculate if having subscription cinema is good value for them",
         skills: ["HTML", "CSS", "JS", "Express/Node", "React", "Webscraping"],
         upvotes: 0
     },
