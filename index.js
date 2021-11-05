@@ -5,6 +5,10 @@ import ProjectsDAO from "./dao/projectsDAO.js"
 import AllergyDAO from "./dao/allergyDAO.js"
 import path from "path"
 import express from "express";
+import { URL } from 'url'; // in Browser, the URL in native accessible on window
+
+// Will contain trailing slash
+const __dirname = new URL('.', import.meta.url).pathname;
 
 dotenv.config()
 
@@ -26,11 +30,12 @@ MongoClient.connect(
     if (process.env.NODE_ENV === "production") {
         console.log("In production");
         console.log(path.resolve(`client/build`));
-        app.use(express.static(path.resolve(`client/build`)));
+
+        app.use(express.static(__dirname + `client/build`));
 
         app.get("*", (req, res) => {
             
-            try{res.sendFile(path.resolve("client/build/index.html"));
+            try{res.sendFile(__dirname + "client/build/index.html");
         } catch(e){
             console.log(e);
         }
