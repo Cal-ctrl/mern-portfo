@@ -4,9 +4,6 @@ import dotenv from "dotenv"
 import ProjectsDAO from "./dao/projectsDAO.js"
 import AllergyDAO from "./dao/allergyDAO.js"
 
-
-// Will contain trailing slash
-
 dotenv.config()
 
 const MongoClient = mongodb.MongoClient
@@ -23,23 +20,6 @@ MongoClient.connect(
     await ProjectsDAO.injectDB(client);
     await AllergyDAO.injectDB(client);
 
-    //server static assets if in production
-    // if (process.env.NODE_ENV === "production") {
-    //     console.log("In production");
-    //     console.log(path.resolve(`client/build`));
-
-    //     app.use(express.static(path.resolve(__dirname + `client/build`)));
-
-    //     app.get("*", (req, res) => {
-            
-    //         try{res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-    //     } catch(e){
-    //         console.log(e);
-    //     }
-    //     });
-
-        
-    // }
 
     app.listen(port, ()=> {
         console.log(`listening on port ${port}`)
