@@ -14,7 +14,9 @@ class ProjectDataService {
         return http.post("/api/v1/projects/projects", data)
     }
 
-    updateProject(data) {
+    updateProject(data, token) {
+        http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
         return http.put("/api/v1/projects/projects", data)
     }
 

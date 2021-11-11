@@ -14,7 +14,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use("/api/v1/projects", projects)
 
-    //server static assets if in production
+    //serve static assets if in production
     if (process.env.NODE_ENV === "production") {
 
         app.use(express.static(path.resolve(__dirname, `client/build`)));

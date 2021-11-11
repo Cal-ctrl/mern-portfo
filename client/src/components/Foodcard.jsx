@@ -17,17 +17,16 @@ function FoodCard (props) {
 
   async function handleDelete(id) {
     const token = await getAccessTokenSilently();
-
-    try {
       AllergyDataService.deleteFoodItem(id, token)
       .then(responce => {
         console.log(responce.data)
       return props.getAll();
 
+      }, error => {
+        console.error(`error in Allergy Data service delete req: ${error}`)
+        alert(`youmay not have permissions to delete this item, contact admin for further info or login`)
       })
-    } catch(e) {
-      console.error(`error in Allergy Data service delete req: ${e}`)
-    }
+
 
   }
 

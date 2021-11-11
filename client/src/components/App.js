@@ -11,6 +11,7 @@ import ProjectPage from "./Pages/ProjectPage"
 import AllergenPage from './Pages/AllergenPage';
 import AddFood from './addFood';
 import MealInfo from './MealInfo';
+import Footer from "./Footer"
 
 
 
@@ -41,6 +42,7 @@ function App() {
     <Route path="/" component={Home} />
 </Switch>
     </Router>
+    <Footer />
     </div>
   );
 }

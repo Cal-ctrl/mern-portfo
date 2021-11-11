@@ -20,15 +20,15 @@ class AllergyDataService {
         const queries = Object.entries(query)
         queries.forEach(([k,v], i) => {
             const amountQueries = queries.length - 1
-            const valueQuery = String(v).replace(/ /g, "%20");
+            
             
         if (i === amountQueries) {
-            string = string.concat(String(k), "=", valueQuery)
+            string = string.concat(String(k), "=", v)
         } else {
-            string = string.concat(String(k), "=", valueQuery,"&")
+            string = string.concat(String(k), "=", v,"&")
         }
         })
-        console.log(string);
+        console.log(`this is the api call ${string}`);
         return http.get(`/api/v1/projects/allergy?${string}`);
       } 
 

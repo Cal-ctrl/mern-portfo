@@ -26,29 +26,42 @@ export default class AllergyDAO {
             if ("name" in filters) {
                 query = {$text: {$search: filters["name"]} } 
             } else {
-                const dietArray = ["Vegetarian", "Vegan", "Halal Certified", "Kosher", "Gluten Free"]
-                const allergenArray = ["Milk and milk proteins", "Egss", "Fish", "Peanuts", "Soybeans", "Barley", "Wheat", "Rye", "Oats", "Cereals containing gluten", "Crustaceans", "Nuts", "Celery", "Mustard", "Sesame", "Sulphites", "Lupin", "Molluscs" ]
+                const dietArray = ["Vegetarian", "Vegan", "Halal_Certified", "Kosher", "Gluten_free"]
+                const allergenArray = ["Milk_and_milk_proteins", "Egss", "Fish", "Peanuts", "Soybeans", "Barley", "Wheat", "Rye", "Oats", "Cereals_containing_gluten", "Crustaceans", "Nuts", "Celery", "Mustard", "Sesame", "Sulphites", "Lupin", "Molluscs" ]
 
                 console.log(filters);
                 for (const key in filters) {
 
-                        if (filters[key] === "true") {
-                            if (dietArray.includes(key)) {
-                                const newFilter = "diets." + [key]
-                                query[[newFilter]] = true
+                        if (dietArray.includes(key)) {
+                            const newFilter = "diets." + [key]
+                            query[[newFilter]] = (filters[key] === "true" ? true : false )
 
-                            } else if (allergenArray.includes(key)) {
-                                const newFilter = "allergyInfo." + [key]
-                                query[[newFilter]] = {$ne: true}
+                        } else if (allergenArray.includes(key)) {
+                            const newFilter = "allergyInfo." + [key]
+                            query[[newFilter]] = (filters[key] === "true" ? true : false )
 
-                            } else {
-                                query[[key]] = true
-                            }
                         } else {
-                            query[[key]] = ObjectId(filters[key])
-                            //query[[key]] = filters[key]  need to add any other values for type of food, etc. {type: "Main"}
-                            console.log(`filters key value is: ${filters[key]}`)
+                            query[[key]] = true
                         }
+           
+                        // Keep until tested on Heroku server. Delete if all work on next push. 
+                        // if (filters[key] === "true") {
+                        //     if (dietArray.includes(key)) {
+                        //         const newFilter = "diets." + [key]
+                        //         query[[newFilter]] = true
+
+                        //     } else if (allergenArray.includes(key)) {
+                        //         const newFilter = "allergyInfo." + [key]
+                        //         query[[newFilter]] = {$ne: true}
+
+                        //     } else {
+                        //         query[[key]] = true
+                        //     }
+                        // } else {
+                        //     query[[key]] = ObjectId(filters[key])
+                        //     //query[[key]] = filters[key]  need to add any other values for type of food, etc. {type: "Main"}
+                        //     console.log(`filters key value is: ${filters[key]}`)
+                        // }
                    
                 }
 

@@ -6,13 +6,12 @@ import ProjectDataService from "../services/project"
 
 
 
-
 function Projects(props) {
     const [projectList, setProjectList] = useState([])
 
     useEffect(()=> {
         retrieveProjects();
-    })
+    }, [])
 
 
     function retrieveProjects() {

@@ -41,7 +41,11 @@ function AddFood(props) {
         AllergyDataService.createFoodItem(data, token)
             .then(responce =>{
                 setSubmitted(true);
-                console.log(responce.data); }
+                console.log(responce.data); },
+                error => {
+                    console.error(`Error in api request for creating item: ${error}`)
+                    alert(`You may not have permission to create this item, please log in or contact the admin to request access`)
+                }
                 )
         ;
     }
@@ -53,7 +57,13 @@ function AddFood(props) {
             .then(r => {
                 setSubmitted(true);
                 console.log(r.data);
-            })
+            },
+            error => {
+                console.error(`Error in api request for updating item: ${error}`)
+                alert(`You may not have permission to create this item, please log in or contact the admin to request access`)
+            }
+
+            )
 
     }
 

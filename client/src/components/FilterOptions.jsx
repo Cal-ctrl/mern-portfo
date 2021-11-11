@@ -113,7 +113,7 @@ function FilterOptions(props) {
 
 
     return <div className="filter-option"><Container  > 
-    <h3 style={{display: "inline"}}>Options</h3><Fab sx={{display: "inline", ml: 1, mb:1}} style={{
+    <h3 style={{display: "inline"}}>Filters, expand to filter the items</h3><Fab sx={{display: "inline", ml: 1, mb:1}} style={{
     maxHeight: "30px",
     minHeight: "30px",
     minWidth: "30px",
