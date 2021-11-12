@@ -10,6 +10,7 @@ import Container from 'react-bootstrap/Container'
 
 
 function Contact() {
+  
   return (
     <div> 
     <Profile />

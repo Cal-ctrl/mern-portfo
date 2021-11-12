@@ -38,30 +38,12 @@ export default class AllergyDAO {
 
                         } else if (allergenArray.includes(key)) {
                             const newFilter = "allergyInfo." + [key]
-                            query[[newFilter]] = (filters[key] === "true" ? true : false )
+                            query[[newFilter]] = (filters[key] === "true" ? false : true )
 
                         } else {
                             query[[key]] = true
                         }
            
-                        // Keep until tested on Heroku server. Delete if all work on next push. 
-                        // if (filters[key] === "true") {
-                        //     if (dietArray.includes(key)) {
-                        //         const newFilter = "diets." + [key]
-                        //         query[[newFilter]] = true
-
-                        //     } else if (allergenArray.includes(key)) {
-                        //         const newFilter = "allergyInfo." + [key]
-                        //         query[[newFilter]] = {$ne: true}
-
-                        //     } else {
-                        //         query[[key]] = true
-                        //     }
-                        // } else {
-                        //     query[[key]] = ObjectId(filters[key])
-                        //     //query[[key]] = filters[key]  need to add any other values for type of food, etc. {type: "Main"}
-                        //     console.log(`filters key value is: ${filters[key]}`)
-                        // }
                    
                 }
 

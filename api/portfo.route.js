@@ -1,6 +1,7 @@
 import express from "express";
 import ProjectCtrl from "./projects.controller.js"
 import AllergyCtrl from "./allergy.controller.js" 
+import ContactCtrl from "./contact.controller.js"
 import { auth } from 'express-oauth2-jwt-bearer';
 import jwt from "express-jwt";
 import jwksRsa from "jwks-rsa";
@@ -48,6 +49,9 @@ router.route("/allergy")
     .post(authorizeAccessToken, checkPermissions, AllergyCtrl.apiPostAllergyInfo) //Auth needed
     .put(authorizeAccessToken, checkPermissions, AllergyCtrl.apiUpdateAllergyInfo) // Auth Needed
     .delete(authorizeAccessToken, checkPermissions, AllergyCtrl.apiDeleteAllergyInfo) // Auth Needed 
+
+router.route("/contact")
+      .post(ContactCtrl.apiPostContactMessage)
 
 
 

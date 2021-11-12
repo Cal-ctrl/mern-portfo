@@ -22,9 +22,17 @@ function FilterOptions(props) {
 
     const [filters, setFilters] = useState({})
 
+    const dietArray = ["Vegetarian", "Vegan", "Halal_Certified", "Kosher", "Gluten_free"]
+    const allergenArray = ["Milk_and_milk_proteins", "Egss", "Fish", "Peanuts", "Soybeans", "Barley", "Wheat", "Rye", "Oats", "Cereals_containing_gluten", "Crustaceans", "Nuts", "Celery", "Mustard", "Sesame", "Sulphites", "Lupin", "Molluscs" ]
+
+
     useEffect(() => {
       handleClear()
     }, [])
+
+    useEffect(() => {
+      handleFilter()
+    }, [filters])
 
     const boxStyle = {
       display: 'grid',
@@ -61,27 +69,10 @@ function FilterOptions(props) {
   }
 
   function handlesetFilter(e, check) {
-    try {
-      if(check) {
-        console.log(`checked bool`);
-        setFilters(preState => {
-          preState[[e.target.name]] = e.target.checked
-        return {...preState}
-      })
-      } else {
-        console.log(`checked not bool`);
-        setFilters(preState => {
-          preState[[e.target.name]] = e.target.value
-        return {...preState}
-      })
-  
-      }
-
-    } catch(e) {
-      console.error(`error in setting filters when checking if value id switch: ${e}`)
-    }
-    console.log(filters);
-
+    setFilters(preState => {
+      preState[[e.target.name]] = (check ? e.target.checked : e.target.value)
+      return {...preState}
+    })
   }
 
   function handleExpand() {
@@ -129,6 +120,7 @@ function FilterOptions(props) {
     <Box sx={{
     display: 'grid',}}>
     <AllergenFilter onChange={handleAllergenChange} allergenFilterArray={Object.entries(tempFilterObject.allergyInfo)} />
+    <h4>Filters active</h4>
     </Box>
     </Box>
     <Box sx={{
@@ -136,7 +128,7 @@ function FilterOptions(props) {
     gap: 1,
     gridTemplateColumns: 'repeat(6, 1fr)',
   }}>
-    <Button type="submit" onClick={handleFilter}>Filter</Button>
+      
     <Button type="submit" onClick={handleClear}>Clear Filters</Button>
     <Link className="btn btn-sm btn-primary" to={{pathname: "/allergen/add"}}>Add</Link>
 
@@ -144,6 +136,15 @@ function FilterOptions(props) {
     </div>
 
       </Collapse>
+      {Object.entries(filters).map(([k, v], i) => {
+        if (v) {        
+          const filterDisplay = dietArray.includes(k) ? `Showing foods suitable for ${k}` : (allergenArray.includes(k) ? `Showing foods not containing ${k.replace(/_/g, " ")}`: k) 
+          return <p>{filterDisplay}</p>
+          } else {
+            const filterDisplay = dietArray.includes(k) ? `Showing foods not suitable for ${k}` : (allergenArray.includes(k) ? `Showing foods containing ${k.replace(/_/g, " ")}`: k) 
+          return <p>{filterDisplay}</p>
+          }
+    })}
     </Container>
     </div>
 }
