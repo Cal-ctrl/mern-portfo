@@ -67,3 +67,7 @@ body {
   margin-top: 10px;
 }
 
+.submitted {
+  justify-content: center;
+  text-align: center;
+}

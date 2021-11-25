@@ -16,9 +16,9 @@ export default class contactDAO{
         }
     }
 
-    static async postContact(email, message) {
+    static async postContact(email, message, date) {
         try{
-            const conactInfo = {
+            const contactInfo = {
                 email: email,
                 message: message,
                 date: new Date()

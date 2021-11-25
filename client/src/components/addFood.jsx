@@ -61,6 +61,7 @@ function AddFood(props) {
             error => {
                 console.error(`Error in api request for updating item: ${error}`)
                 alert(`You may not have permission to create this item, please log in or contact the admin to request access`)
+                window.location = "/contact"
             }
 
             )
@@ -98,7 +99,7 @@ function AddFood(props) {
 
     return (
         <Container fluid>
-        {submitted ? <div><h1>Submitted!</h1><Link to="/allergen">Back to Allergy Page</Link></div> : 
+        {submitted ? <div className="submitted"><h1  >Submitted!</h1><Link to="/allergen">Back to Allergy Page</Link></div> : 
         
         <Form>
 
