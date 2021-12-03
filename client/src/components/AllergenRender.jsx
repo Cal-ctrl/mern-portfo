@@ -14,10 +14,27 @@ function AllergenRender() {
     const [foodList, setFoodList] = useState([])
     const [downloadButton, setDownloadButton] = useState(0)
     const [downloadSelected, setDownloadSelected] = useState([])
+    const [checkAll, setCheckAll] = useState(false)
+    const [isChecked, setIsChecked] =useState([])
+
+    /*Create array of Bools equal to length of Allergy list
+    Set all to false 
+    Use array to send values to check boxesin foodcard
+    when checked, access the index of that array and change to true
+    when select all func used, change all values to true */
+
 
     useEffect(()=>{
-        retrieveFoodList()
+        retrieveFoodList();
     }, [])
+
+    useEffect(() => {
+        console.log(`triggered checked array populate`);
+            let temp = new Array(foodList.length).fill(false)
+            setIsChecked(temp)
+            console.log(isChecked);
+
+    }, [foodList])
 
 
     function retrieveFoodList () {
@@ -25,16 +42,20 @@ function AllergenRender() {
         .then(response => {
             setFoodList(response.data.allergy)
         })
+
+
+        
     }
 
     function collateDownloadSelect (e, selected) {
 
-        if (e.target.checked) {
+        if (e.target.checked === "selectAll") {
+            setDownloadSelected(selected)
+        } else if (e.target.checked) {
             const tempArray = [...downloadSelected]
             tempArray.push(selected)
             setDownloadSelected(tempArray)
-    
-        } else {
+        } else if (!e.target.checked) {
             console.log(`unchecked`);
         }
         
@@ -60,6 +81,23 @@ function AllergenRender() {
             link.click()
           }
 
+          function selectAll (){
+              console.log(`triggered Select all func`);
+              let selectAll = new Array(foodList.length).fill(true)
+              setIsChecked(selectAll)
+              setDownloadButton(foodList.length)
+              collateDownloadSelect({target: {checked: "selectAll"}}, foodList)
+          }
+
+          function unselectAll () {
+              console.log(`triggered unSelect func`);
+              let unSelectArray = new Array(foodList.length).fill(false)
+              setIsChecked(unSelectArray)
+              setDownloadButton(0)
+              setDownloadSelected([])
+
+          }
+
 
     return (
         <Container className="padding-rm" fluid>
@@ -69,7 +107,12 @@ function AllergenRender() {
         <h1 className="menu-head">Menu Items</h1>
 
         <Container >
-        {downloadButton > 0 && <Button onClick={downloadSelectedFunc}>Download</Button>}
+        <Button onClick={selectAll} >Select All</Button>
+        <Button onClick={unselectAll}> Unselect All </Button>
+
+        {downloadButton > 0 &&
+        <Button onClick={downloadSelectedFunc}>Download</Button>
+        }
 
         <Box className="food-cards" sx={{
     display: 'grid',
@@ -81,11 +124,14 @@ function AllergenRender() {
         {foodList.map((food, i) => {
             const dietInfo = Object.entries(food.diets)
             const allergyInfo = Object.entries(food.allergyInfo)
+            const typeURL = "images/" + food.type + ".jpg"
 
         return (
             <Foodcard
-                key={i} 
+                key={i}
+                arrayIndex={i}
                 name={food.name}
+                restaurant={food.restaurant}
                 dietInfo={dietInfo}
                 allergyInfo={allergyInfo}
                 id={food._id}
@@ -93,6 +139,10 @@ function AllergenRender() {
                 getAll={retrieveFoodList}
                 downloadCheck={collateDownloadSelect}
                 downloadButton={setDownloadButton}
+                isChecked={isChecked[i]}
+                setIsChecked={setIsChecked}
+                type={typeURL}
+
             /> 
         )      
         })}

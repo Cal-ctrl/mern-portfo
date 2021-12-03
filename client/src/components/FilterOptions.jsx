@@ -22,7 +22,7 @@ function FilterOptions(props) {
 
     const [filters, setFilters] = useState({})
 
-    const dietArray = ["Vegetarian", "Vegan", "Halal_Certified", "Kosher", "Gluten_free"]
+    const dietArray = ["Vegetarian", "Vegan", "Halal_Certified", "Kosher", "Gluten_Free"]
     const allergenArray = ["Milk_and_milk_proteins", "Egss", "Fish", "Peanuts", "Soybeans", "Barley", "Wheat", "Rye", "Oats", "Cereals_containing_gluten", "Crustaceans", "Nuts", "Celery", "Mustard", "Sesame", "Sulphites", "Lupin", "Molluscs" ]
 
 
@@ -41,6 +41,7 @@ function FilterOptions(props) {
 
     function handleChange(e){
       const misc = {...tempFilterObject}
+      console.log(e.target.value);
       if (e.target.name === "currentMenu") {
         misc.currentMenu = e.target.checked
         handlesetFilter(e, true);    
@@ -120,7 +121,6 @@ function FilterOptions(props) {
     <Box sx={{
     display: 'grid',}}>
     <AllergenFilter onChange={handleAllergenChange} allergenFilterArray={Object.entries(tempFilterObject.allergyInfo)} />
-    <h4>Filters active</h4>
     </Box>
     </Box>
     <Box sx={{
@@ -129,23 +129,44 @@ function FilterOptions(props) {
     gridTemplateColumns: 'repeat(6, 1fr)',
   }}>
       
-    <Button type="submit" onClick={handleClear}>Clear Filters</Button>
-    <Link className="btn btn-sm btn-primary" to={{pathname: "/allergen/add"}}>Add</Link>
+    <Button className="filter-button" type="submit" onClick={handleClear}>Clear Filters</Button>
+    <Button href="/allergen/add">Add</Button>
+
+    
 
     </Box>
     </div>
-
-      </Collapse>
+    {/* //Filiter display */}
+    <Box sx={{
+        display: "grid",
+        gap: 1,
+        gridTemplateColumns: `repeat(2, 1fr)`,
+        m: "5px",
+        }}>
+      
       {Object.entries(filters).map(([k, v], i) => {
-        if (v) {        
-          const filterDisplay = dietArray.includes(k) ? `Showing foods suitable for ${k}` : (allergenArray.includes(k) ? `Showing foods not containing ${k.replace(/_/g, " ")}`: k) 
+        if (dietArray.includes(k) || allergenArray.includes(k) && v === true) {        
+          const filterDisplay = dietArray.includes(k) ? `Showing foods suitable for ${k.replace(/_/g, " ")} diets` : (allergenArray.includes(k) ? `Showing foods not containing ${k.replace(/_/g, " ")}`: k) 
+          return <p>{filterDisplay}</p>
+          } else if (dietArray.includes(k) || allergenArray.includes(k) && v === false) {
+            const filterDisplay = dietArray.includes(k) ? `Showing foods not suitable for ${k.replace(/_/g, " ")}  diets` : (allergenArray.includes(k) ? `Showing foods containing ${k.replace(/_/g, " ")}`: k) 
           return <p>{filterDisplay}</p>
           } else {
-            const filterDisplay = dietArray.includes(k) ? `Showing foods not suitable for ${k}` : (allergenArray.includes(k) ? `Showing foods containing ${k.replace(/_/g, " ")}`: k) 
-          return <p>{filterDisplay}</p>
+            const filterDisplay = `Show items with ${k} filter: ${v}`
+            return <p>{filterDisplay}</p>
           }
     })}
+
+      </Box>
+
+      </Collapse>
+
+
+
+
     </Container>
+
+
     </div>
 }
 

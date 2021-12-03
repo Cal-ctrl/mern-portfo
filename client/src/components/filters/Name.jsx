@@ -25,6 +25,14 @@ function NameFilter(props) {
     <option value="Side">Side</option>
     <option value="Drink">Drink</option>
   </Form.Select>
+  <Form.Label>Restaurant</Form.Label>
+  <Form.Select onChange={(e) => {
+        e.preventDefault();
+        props.onChange(e)}} name="restaurant" value={props.filterName.restaurant}>  
+    <option value="">Choose restaurant</option>
+    <option value="cineworld_sheffield_vip">Cineworld Sheffield VIP</option>
+  </Form.Select>
+
 
     <Form.Label>On Menu</Form.Label>
     <Switch onChange={(e) => {

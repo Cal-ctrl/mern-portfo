@@ -40,8 +40,12 @@ export default class AllergyDAO {
                             const newFilter = "allergyInfo." + [key]
                             query[[newFilter]] = (filters[key] === "true" ? false : true )
 
+                        } else if("id" in filters) {
+                            query._id = ObjectId(filters[key])
                         } else {
-                            query[[key]] = true
+                            query[[key]] = filters[key]
+
+
                         }
            
                    
@@ -78,14 +82,17 @@ export default class AllergyDAO {
 
     }
 
-    static async addFood(name, diets, allergen, currentMenu, foodType){
+    static async addFood(name, diets, allergen, currentMenu, foodType, dateAdded, ingredients, restaurant){
         try {
             const allergyDoc = {
                 name: name,
                 diets: diets,
                 allergyInfo: allergen,
                 currentMenu: currentMenu,
-                type: foodType
+                type: foodType,
+                dateAdded: dateAdded,
+                ingredients: ingredients,
+                restaurant: restaurant
 
             } 
             return await allergy.insertOne(allergyDoc)
@@ -97,7 +104,7 @@ export default class AllergyDAO {
 
     }
 
-    static async updateFood (id, name, dietry, allergen, currentMenu, type) {
+    static async updateFood (id, name, dietry, allergen, currentMenu, type, dateAdded, ingredients, restaurant) {
         try {
             const updateFood = await allergy.updateOne(
                 {_id: ObjectId(id)}, 
@@ -106,8 +113,11 @@ export default class AllergyDAO {
                     diets: dietry,
                     allergyInfo: allergen,
                     currentMenu: currentMenu,
-                    type: type
-                        }
+                    type: type,
+                    dateAdded: dateAdded,
+                    ingredients: ingredients,
+                    restaurant: restaurant
+                            }
                     })
                     return updateFood
         } catch(e) {

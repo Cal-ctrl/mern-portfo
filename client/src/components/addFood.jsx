@@ -37,7 +37,8 @@ function AddFood(props) {
     const [submitted, setSubmitted] = useState(false)
 
     async function addFood(data) {
-        const token = await getAccessTokenSilently();
+        const token = await getAccessTokenSilently()
+    
         AllergyDataService.createFoodItem(data, token)
             .then(responce =>{
                 setSubmitted(true);
@@ -104,14 +105,23 @@ function AddFood(props) {
         <Form>
 
   <Form.Group className="mb-3" controlId="formFoodName">
-    <Form.Label>Name</Form.Label>
+    <Form.Label><h5>Name</h5></Form.Label>
     <Form.Control onChange={handleChange} type="text" placeholder="Enter Food item here" name="name" value={newFoodItem.name}/>
+    <Form.Label><h5>Restaurant</h5></Form.Label>
+    <Form.Select onChange={handleChange} name="restaurant" value={newFoodItem.restaurant}>  
+  <option>Choose restaurant</option>
+  <option value="cineworld_sheffield_vip">Cineworld Sheffield VIP</option>
+  </Form.Select>
+
   </Form.Group>
         <Box sx={style}>
     <div>
   <h1>Diet Info</h1>
   <DietForm newDietInfo={newFoodItem.diets} onChange={handleDietChange} />
-  <h3>Menu Information</h3>
+  <Form.Label><h5>Ingredients</h5></Form.Label>
+  <Form.Control onChange={handleChange} as="textarea" rows={3} placeholder="Paste ingredients here" name="ingredients" value={newFoodItem.ingredients}/>
+
+  <h5>Menu Information</h5>
   <Form.Group >
   <Form.Select onChange={handleChange} name="type" value={newFoodItem.type}>  
   <option>Choose menu type</option>

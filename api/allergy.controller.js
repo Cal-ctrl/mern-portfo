@@ -35,6 +35,9 @@ export default class AllergyController{
      const allergens = req.body.allergyInfo 
      const currentMenu = req.body.currentMenu
      const foodType = req.body.type
+     const dateAdded = new Date()
+     const ingredients = req.body.ingredients
+     const restaurant = req.body.restaurant
 
      const foodCreate = await AllergyDAO.addFood(
          allergyName,
@@ -42,6 +45,9 @@ export default class AllergyController{
          allergens,
          currentMenu,
          foodType,
+         dateAdded,
+         ingredients,
+         restaurant
      )
      console.log(foodCreate);
      res.json({status: `success`})
@@ -58,6 +64,10 @@ export default class AllergyController{
         const allergens = req.body.allergyInfo 
         const currentMenu = req.body.currentMenu
         const type = req.body.type
+        const dateAdded = new Date()
+        const ingredients = req.body.ingredients
+        const restaurant = req.body.restaurant
+   
 
         const allergyResponce = await AllergyDAO.updateFood(
             foodId,
@@ -65,7 +75,11 @@ export default class AllergyController{
             allergyDietry,
             allergens,
             currentMenu,
-            type
+            type,
+            dateAdded,
+            ingredients,
+            restaurant
+
         )
         res.json({status: `success`})
 

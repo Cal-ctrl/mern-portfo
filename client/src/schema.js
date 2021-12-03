@@ -32,7 +32,8 @@ const schema = {
     type: "",
     imgURL: "",
     dateAdded: "",
-    dateOffMenu: ""
+    restaurant: "",
+    ingredients:""
 }
 
 export default schema;

@@ -55,7 +55,7 @@ return (
       <article>
         <h2>{props.name}</h2>
         <p>{props.content}</p>
-        { isAuthenticated && 
+        { (isAuthenticated && props.id !== "me") && 
         <Additional likedfunc={liked} projectId={props.projectId} upVotes={upVote} />}
       </article> 
       </section>
@@ -67,7 +67,7 @@ return (
       <article>
         <h2>{props.name}</h2>
         <p>{props.content}</p>
-        { isAuthenticated && 
+        { (isAuthenticated && props.id !== "me") &&
         <Additional likedfunc={liked} projectId={props.projectId} upVotes={upVote} />}
       </article>
       <article>

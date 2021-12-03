@@ -32,7 +32,7 @@ function AllergenLearnMore(props) {
         title={props.stateKey ? " Allergen Information" : "Dietry Information" }
         subheader="Full information below" />
         <CardContent>
-        <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+        <Typography sx={{ fontSize: 20 }} color="text.secondary" >
         {props.stateKey ? "Allergens in this item" : "Suitable if following these diets" }
       </Typography>
         <List>
@@ -41,7 +41,7 @@ function AllergenLearnMore(props) {
         return (v && <ListItem>{props.stateKey ? "Contains " : "Suitable for "}{k}</ListItem>)
       })}   
       </List>
-      <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+      <Typography sx={{ fontSize: 20 }} color="text.secondary" >
         {props.stateKey ? "Allergens not in this item" : "Not suitable if following these diets" }
       </Typography>
       <List>
