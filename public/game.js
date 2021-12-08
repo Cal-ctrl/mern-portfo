@@ -11,7 +11,7 @@ export const scoreBoard = document.getElementById("score")
 function main (currentTime){
     if (gameOver) {
         if(confirm(`You lost, press ok to restart`)){
-            window.location = `http://localhost:5000/snake`
+            window.location = `https://myportfoapp.herokuapp.com/snake`
         }
         return
     }
