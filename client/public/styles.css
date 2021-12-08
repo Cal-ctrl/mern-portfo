@@ -13,6 +13,10 @@ body {
   background-image: url("https://www.transparenttextures.com/patterns/axiom-pattern.png");
   }
 
+a { color: inherit; 
+  text-decoration: inherit;
+} 
+
 #left {
   width: 140px;
   padding-right: 75px;
@@ -64,6 +68,10 @@ body {
 }
 .filter-button{
   margin-left: 0;
+}
+
+.upload-btn{
+  margin-top: 10px;
 }
 
 .footer {

@@ -131,6 +131,7 @@ function AllergenRender() {
                 key={i}
                 arrayIndex={i}
                 name={food.name}
+                img={food.foodImageName}
                 restaurant={food.restaurant}
                 dietInfo={dietInfo}
                 allergyInfo={allergyInfo}

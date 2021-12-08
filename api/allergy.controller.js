@@ -1,6 +1,8 @@
 import { query } from "express";
 import AllergyDAO from "../dao/allergyDAO.js";
 
+
+
 export default class AllergyController{
 
     static async apiGetAllergyInfo(req, res, next){
@@ -47,7 +49,7 @@ export default class AllergyController{
          foodType,
          dateAdded,
          ingredients,
-         restaurant
+         restaurant,
      )
      console.log(foodCreate);
      res.json({status: `success`})
@@ -67,20 +69,28 @@ export default class AllergyController{
         const dateAdded = new Date()
         const ingredients = req.body.ingredients
         const restaurant = req.body.restaurant
-   
+        const foodImage = req.file.originalname
+        if (foodImage !== null) {
+            const allergyImageNameResponce = await AllergyDAO.updateFoodImage(
+                foodId,
+                foodImage,
+            )
+        } else {
+            const allergyResponce = await AllergyDAO.updateFood(
+                foodId,
+                allergyName,
+                allergyDietry,
+                allergens,
+                currentMenu,
+                type,
+                dateAdded,
+                ingredients,
+                restaurant,
+    
+            )
 
-        const allergyResponce = await AllergyDAO.updateFood(
-            foodId,
-            allergyName,
-            allergyDietry,
-            allergens,
-            currentMenu,
-            type,
-            dateAdded,
-            ingredients,
-            restaurant
+        }
 
-        )
         res.json({status: `success`})
 
     } catch (e){

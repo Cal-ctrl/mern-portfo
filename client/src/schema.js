@@ -33,7 +33,8 @@ const schema = {
     imgURL: "",
     dateAdded: "",
     restaurant: "",
-    ingredients:""
+    ingredients:"",
+    upVote: 0,
 }
 
 export default schema;

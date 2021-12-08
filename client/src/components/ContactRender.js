@@ -18,7 +18,11 @@ function ContactRender() {
   function sendMessage(){
     ContactDataService.createMessage(message)
     .then(res => {
+      alert(`Meesage sent, thank you!`)
       console.log(res);
+    })
+    .catch( e => {
+      console.error(`Error in sending Message to DB: ${e}`);
     })
     
 

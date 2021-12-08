@@ -2,9 +2,10 @@ import express from "express";
 import cors from "cors";
 import projects from "./api/portfo.route.js";
 import path from "path";
-import { URL } from 'url'; // in Browser, the URL in native accessible on window
-const __dirname = new URL('.', import.meta.url).pathname;
+// import { URL } from 'url'; // in Browser, the URL in native accessible on window
+// const __dirname = new URL('.', import.meta.url).pathname;
 
+export const __dirname = path.resolve()
 
 const app = express()
 
@@ -12,7 +13,13 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
 
+app.use(express.static("public"));
+
 app.use("/api/v1/projects", projects)
+
+app.get("/snake", function(req, res) {
+    res.sendFile(__dirname + "/snake.html")
+})
 
     //serve static assets if in production
     if (process.env.NODE_ENV === "production") {
@@ -24,7 +31,9 @@ app.use("/api/v1/projects", projects)
         });
 
         
-    }
+    } 
+
+
 
 app.use("*", (req, res) => res.status(404).json({error: "not Found"}))
 

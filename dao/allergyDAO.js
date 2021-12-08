@@ -42,6 +42,8 @@ export default class AllergyDAO {
 
                         } else if("id" in filters) {
                             query._id = ObjectId(filters[key])
+                        }else if("currentMenu" in filters) {
+                            query.currentMenu = true
                         } else {
                             query[[key]] = filters[key]
 
@@ -116,7 +118,7 @@ export default class AllergyDAO {
                     type: type,
                     dateAdded: dateAdded,
                     ingredients: ingredients,
-                    restaurant: restaurant
+                    restaurant: restaurant,
                             }
                     })
                     return updateFood
@@ -126,6 +128,24 @@ export default class AllergyDAO {
 
         }
         
+    }
+
+    static async updateFoodImage (id, foodImageName){
+
+        try {
+            const updateFoodImage = await allergy.updateOne(
+                {_id: ObjectId(id)},
+                {$set: {
+                    foodImageName: foodImageName
+                }}
+            )
+            return updateFoodImage
+        
+        } catch (e) {
+            console.error(`unable to update image name in document: ${e}`)
+            return {error: e}
+
+        }
     }
 
     static async deleteFood(id) {

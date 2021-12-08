@@ -4,6 +4,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 
 import Additional from './Additional';
+import { Link } from 'react-router-dom';
+import { getButtonUtilityClass } from '@mui/material';
 
 
 function ArticleObject(props){
@@ -44,6 +46,8 @@ function ArticleObject(props){
 
    }
 
+
+
 return (
   altText ? 
   <div>
@@ -53,7 +57,8 @@ return (
       <img id={props.id} src={props.img} alt="article-img" />
       </article>
       <article>
-        <h2>{props.name}</h2>
+      
+        <a href={props.name === "snake" ? "http://localhost:5000/snake" :"/" + props.name}><h2>{props.name}</h2></a>
         <p>{props.content}</p>
         { (isAuthenticated && props.id !== "me") && 
         <Additional likedfunc={liked} projectId={props.projectId} upVotes={upVote} />}
@@ -65,7 +70,7 @@ return (
       <div>
       <section className={props.className}>
       <article>
-        <h2>{props.name}</h2>
+      <a href={props.name === "snake" ? "http://localhost:5000/snake" :"/" + props.name}><h2>{props.name}</h2></a>
         <p>{props.content}</p>
         { (isAuthenticated && props.id !== "me") &&
         <Additional likedfunc={liked} projectId={props.projectId} upVotes={upVote} />}

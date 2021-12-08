@@ -16,7 +16,7 @@ function Profile(){
 
 return (
     <Container>
-    <h2 class="bio">Bio</h2>
+    <h2 className="bio">Bio</h2>
     <hr/>
     <ArticleObject
     name={bioInfo.name}

@@ -25,7 +25,7 @@ function FoodCard (props) {
 
       }, error => {
         console.error(`error in Allergy Data service delete req: ${error}`)
-        alert(`youmay not have permissions to delete this item, contact admin for further info or login`)
+        alert(`you may not have permissions to delete this item, contact admin for further info or login`)
       })
 
 
@@ -52,14 +52,14 @@ function FoodCard (props) {
     return (
     <Card sx={{ maxWidth: 345 }}>
     <CardContent>
-      <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterbottom>
+      <Typography sx={{ fontSize: 16 }} color="text.secondary" >
         {props.name}
 
       </Typography>
       <CardMedia
         component="img"
         height="194"
-        image={props.type}
+        image={props.img ? "images/foodImgs/" + props.img : props.type}
         alt="main"
       />
       <List>
@@ -72,10 +72,10 @@ function FoodCard (props) {
         return (v && <ListItem key={i}>Contains {k}</ListItem>)
       })}
       </List>
-      {props.restaurant && <Typography sx={{ fontSize: 14}} color="text.secondary" gutterBottom>Serving at {props.restaurant.replace(/_/g, " ")}</Typography>}
+      {props.restaurant && <Typography sx={{ fontSize: 14}} color="text.secondary">Serving at {props.restaurant.replace(/_/g, " ")}</Typography>}
       
     </CardContent>
-    <CardActions gutterBottom>
+    <CardActions>
     <Link variant="button" className="btn btn-outline-primary btn-sm" to={{
         pathname: "/allergen/" + props.id,
         state: {

@@ -23,6 +23,9 @@ class ProjectDataService {
     deleteProject(id) {
         return http.delete(`/api/v1/projects/projects?id=${id}`)
     }
+    getSnakeGame() {
+        return http.get(`/snake`)
+    }
 }
 
 export default new ProjectDataService;
