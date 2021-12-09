@@ -43,7 +43,6 @@ function Projects(props) {
             
 
             )}
-            <a href="http://localhost:5000/snake"> Snake Test</a>
 
             </Container>    
     )

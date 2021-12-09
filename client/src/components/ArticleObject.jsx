@@ -58,7 +58,7 @@ return (
       </article>
       <article>
       
-        <a href={props.name === "snake" ? "http://localhost:5000/snake" :"/" + props.name}><h2>{props.name}</h2></a>
+        <a href={props.name === "snake" ? "https://myportfoapp.herokuapp.com//snake" :"/" + props.name}><h2>{props.name}</h2></a>
         <p>{props.content}</p>
         { (isAuthenticated && props.id !== "me") && 
         <Additional likedfunc={liked} projectId={props.projectId} upVotes={upVote} />}
@@ -70,7 +70,7 @@ return (
       <div>
       <section className={props.className}>
       <article>
-      <a href={props.name === "snake" ? "http://localhost:5000/snake" :"/" + props.name}><h2>{props.name}</h2></a>
+      <a href={props.name === "snake" ? "https://myportfoapp.herokuapp.com//snake" :"/" + props.name}><h2>{props.name}</h2></a>
         <p>{props.content}</p>
         { (isAuthenticated && props.id !== "me") &&
         <Additional likedfunc={liked} projectId={props.projectId} upVotes={upVote} />}
