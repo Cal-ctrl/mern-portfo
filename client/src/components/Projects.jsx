@@ -38,6 +38,7 @@ function Projects(props) {
                     alt={i % 2 === 0 ? true : false}
                     upVote={true}
                     upVotes={project.upvotes}
+                    url={project.url}
                 />
                     )}
             

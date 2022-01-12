@@ -41,8 +41,9 @@ function App() {
     <Route path="/allergen" component={AllergenPage} />
     <Route path="/" component={Home} />
 </Switch>
+<Footer />
     </Router>
-    <Footer />
+    
     </div>
   );
 }

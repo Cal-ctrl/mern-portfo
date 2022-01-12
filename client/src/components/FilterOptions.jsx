@@ -136,7 +136,7 @@ function FilterOptions(props) {
 
     </Box>
     </div>
-    {/* //Filiter display */}
+    {/* Filter display */}
     <Box sx={{
         display: "grid",
         gap: 1,
