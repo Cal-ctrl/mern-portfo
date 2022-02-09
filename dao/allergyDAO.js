@@ -12,9 +12,7 @@ export default class AllergyDAO {
         } catch (e){
             console.error(
                 `Unable to establish a collection handle in allergyDAO: ${e}`);
-
         }
-
     }
 
     static async getAllergyInfo({
@@ -42,23 +40,15 @@ export default class AllergyDAO {
 
                         } else if("id" in filters) {
                             query._id = ObjectId(filters[key])
-                        }else if("currentMenu" in filters) {
+                        } else if("currentMenu" in filters) {
                             query.currentMenu = true
                         } else {
                             query[[key]] = filters[key]
-
-
-                        }
-           
-                   
+                        }  
                 }
-
-
                 console.log(query);
-
             }
         }
-    
     let cursor
 
     try {
@@ -125,9 +115,7 @@ export default class AllergyDAO {
         } catch(e) {
             console.error(`unable to update document: ${e}`)
             return {error: e}
-
         }
-        
     }
 
     static async updateFoodImage (id, foodImageName){
@@ -159,7 +147,4 @@ export default class AllergyDAO {
             return {error: e}
         }
     }
-
-
-
 }

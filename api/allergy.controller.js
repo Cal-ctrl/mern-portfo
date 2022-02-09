@@ -111,8 +111,4 @@ export default class AllergyController{
             res.status(500).json({error: e.message})
         }
     } 
-
-
-
-    
 }

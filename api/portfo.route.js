@@ -2,6 +2,7 @@ import express from "express";
 import ProjectCtrl from "./projects.controller.js"
 import AllergyCtrl from "./allergy.controller.js" 
 import ContactCtrl from "./contact.controller.js"
+import RetailCtrl from "./retail.controller.js";
 import { auth } from 'express-oauth2-jwt-bearer';
 import jwt from "express-jwt";
 import jwksRsa from "jwks-rsa";
@@ -61,7 +62,11 @@ router.route("/allergy")
 router.route("/contact")
       .post(ContactCtrl.apiPostContactMessage)
 
-
+router.route("/retail")
+      .get(RetailCtrl.apiGetRetail)
+      .post(RetailCtrl.apiPostRetail)
+      .put(RetailCtrl.apiUpdateRetail)
+      .delete(RetailCtrl.apiDeleteRetailInfo)
 
 
 export default router;

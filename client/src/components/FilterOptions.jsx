@@ -10,7 +10,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import Fab from '@mui/material/Fab';
 import AllergyDataService from "../services/allergy";
-import { Link } from "react-router-dom";
 import Collapse from '@mui/material/Collapse';
 
 function FilterOptions(props) {
@@ -27,11 +26,11 @@ function FilterOptions(props) {
 
 
     useEffect(() => {
-      handleClear()
+      handleClear();
     }, [])
 
     useEffect(() => {
-      handleFilter()
+      handleFilter();
     }, [filters])
 
     const boxStyle = {

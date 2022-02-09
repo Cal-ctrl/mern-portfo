@@ -23,6 +23,7 @@ function Header() {
             <NavDropdown.Item href="/projects">Projects</NavDropdown.Item>
             <NavDropdown.Item href="/allergen">Allergy Info</NavDropdown.Item>
             <NavDropdown.Item href="/blog">Blog</NavDropdown.Item>
+            <NavDropdown.Item href="/retail">Retail Bible</NavDropdown.Item>
             </NavDropdown>
         </Nav>
         </Navbar.Collapse>

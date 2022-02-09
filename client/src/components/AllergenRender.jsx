@@ -14,7 +14,6 @@ function AllergenRender() {
     const [foodList, setFoodList] = useState([])
     const [downloadButton, setDownloadButton] = useState(0)
     const [downloadSelected, setDownloadSelected] = useState([])
-    const [checkAll, setCheckAll] = useState(false)
     const [isChecked, setIsChecked] =useState([])
 
     /*Create array of Bools equal to length of Allergy list
@@ -68,9 +67,8 @@ function AllergenRender() {
             downloadSelected.map((jsonObject) =>{
                 let fields = {}
                 fields = {name: jsonObject.name, ...jsonObject.diets,blank:"", ...jsonObject.allergyInfo, }; //Create Object without any nested data
-                console.log(fields);
                 unested.push(fields)
-                return
+                return console.log(fields);
                 })
             const json2csvParser = new Parser();
             const csv = json2csvParser.parse(unested);

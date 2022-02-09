@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import ProjectsDAO from "./dao/projectsDAO.js"
 import AllergyDAO from "./dao/allergyDAO.js"
 import ContactDAO from "./dao/contactDAO.js"
+import RetailDAO from "./dao/retailDAO.js"
 
 dotenv.config()
 
@@ -21,6 +22,7 @@ MongoClient.connect(
     await ProjectsDAO.injectDB(client);
     await AllergyDAO.injectDB(client);
     await ContactDAO.injectDB(client);
+    await RetailDAO.injectDB(client);
 
 
     app.listen(port, ()=> {

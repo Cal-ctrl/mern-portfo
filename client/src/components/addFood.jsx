@@ -3,7 +3,7 @@ import AllergyDataService from "../services/allergy";
 import schema from '../schema';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { Container, Input, Switch } from '@mui/material';
+import { Container, Switch } from '@mui/material';
 import DietForm from './DietForm';
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";

@@ -12,7 +12,7 @@ import AllergenPage from './Pages/AllergenPage';
 import AddFood from './addFood';
 import MealInfo from './MealInfo';
 import Footer from "./Footer"
-
+import RetailBible from './Pages/RetailBible';
 
 
 function App() {
@@ -39,6 +39,7 @@ function App() {
         )}
         />
     <Route path="/allergen" component={AllergenPage} />
+    <Route path="/retail" component={RetailBible} />
     <Route path="/" component={Home} />
 </Switch>
 <Footer />
