@@ -82,7 +82,7 @@ function RetailBibleNegativeTable (props) {
                           try {
                             const stockItemConvert = row.Item.replace("UK-", "")
                             if ( sale[14].includes(row.Item) || sale[14].includes(stockItemConvert) || sale[14].includes("IRE") ) {
-                              sellingCsv[sellingCsv.length - 1] = {...sellingCsv[sellingCsv.length - 1], [`Sale ${salesTrack}`]: sale[1] + " " + sale[2]}                    
+                              sellingCsv[sellingCsv.length - 1] = {...sellingCsv[sellingCsv.length - 1], [`Sale ${salesTrack}`]: sale[15] + " " + sale[16]}                    
                               !fields.includes(`Sale ${salesTrack}`) && fields.push(`Sale ${salesTrack}`)
                               salesTrack += 1
                               return <TableCell>{sale[15]} {sale[16]}</TableCell>
