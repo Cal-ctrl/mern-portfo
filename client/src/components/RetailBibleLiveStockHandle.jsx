@@ -1,31 +1,46 @@
-import { Button, Container, Typography } from "@mui/material";
+import { Button, Container, Box} from "@mui/material";
 import React, {useState, useEffect} from "react";
 import RetailDataService from "../services/retail.js";
 import RetailBibleDateTracker from './RetailBibleDateTracker.jsx';
 import RetailBibleStockRooms from './RetailBibleStockRooms.jsx';
 
-function RetailBibleLiveStockHandle() {
+function RetailBibleLiveStockHandle(props) {
     const [cinemaRetail, setCinemaRetail] = useState()
     const [stockRooms, setStockRooms] = useState([])
     const [items, setItems] =  useState([])
 
     useEffect(()=>{
       getCinemaRetail();
+      // console.log(props.user);
     }, [])
   
     function getCinemaRetail(){
-       RetailDataService.getAll()
-       .then(response => {
-            console.log(response);
-            setCinemaRetail(response.data.cinemas[1])
-            setStockRooms(response.data.cinemas[1].stockRooms)
-            const itemsToSort = response.data.cinemas[1].items
-            console.log(itemsToSort[0])
-            itemsToSort.sort((a, b) => {return new Date(b.expDate[1]) - new Date(a.expDate[1])})
-            setItems(itemsToSort)
+      // get all items debug line
 
-        })
+      //  RetailDataService.getAll()
+      //  .then(response => {
+      //       console.log(response);
+      //       setCinemaRetail(response.data.cinemas[1])
+      //       setStockRooms(response.data.cinemas[1].stockRooms)
+      //       const itemsToSort = response.data.cinemas[1].items
+      //       console.log(itemsToSort[0])
+      //       itemsToSort.sort((a, b) => {return new Date(b.expDate[1]) - new Date(a.expDate[1])})
+      //       setItems(itemsToSort)
+
+      //   })
+        RetailDataService.find(props.email, "email")
+        .then(response => {
+             console.log(response);
+             setCinemaRetail(response.data.cinemas[0])
+             setStockRooms(response.data.cinemas[0].stockRooms)
+             const itemsToSort = response.data.cinemas[0].items
+             console.log(itemsToSort[0])
+             itemsToSort.sort((a, b) => {return new Date(b.expDate[1]) - new Date(a.expDate[1])})
+             setItems(itemsToSort)
+ 
+         })
     }
+
     function updateDateTracker (){
         items.forEach( i => delete i["Item Class"])
         const updateObject = {
@@ -51,10 +66,16 @@ function RetailBibleLiveStockHandle() {
       <h2>Date and Stock Location Tracker</h2>
       <p>Use this button and this table to track dates and stock location</p>
       <Button onClick={updateDateTracker}>Save Changes Stock and Date</Button>
+      <Box sx={{    
+        display: 'grid',
+        gap: 1,
+        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))"
+        }}> 
       <RetailBibleDateTracker items={items} setItems={setItems} stockRooms={stockRooms} setStockRooms={setStockRooms}  itemFocus={false}/>
-      <h2>Urgent Items to review</h2>
-      <p>This table only shows items with less than 3 weeks on the date</p>
       <RetailBibleDateTracker items={items} setItems={setItems}  itemFocus={true}/>
+
+      </Box>
+
       <br />
       </Container>
     )

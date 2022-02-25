@@ -5,6 +5,9 @@ class RetailDataService {
     getAll() {
         return http.get(`/api/v1/projects/retail`)
     }
+    get(id){
+        return http.get(`/api/v1/projects/retail?id=${id}`)
+    }
 
     find(query, by = "cinema") {
         return http.get(`/api/v1/projects/retail?${by}=${query}`)

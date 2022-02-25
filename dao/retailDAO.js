@@ -19,15 +19,21 @@ export default class RetailDAO {
         filters = null,
         page = 0,
         } = {}) {
-        let query
+        let query = {}
         if (filters) {
-        if ("cinema" in filters) {
-            query = {$text: {$search: filters["cinema"]} } 
+        if ("name" in filters) {
+            query = {$text: {$search: filters["name"]} } 
+        } else if ("id" in filters) {
+            // console.log(filters)
+            query = {_id: ObjectId(filters.id)}
+        } else {
+            query = filters
         }
       }
     let cursor
 
     try {
+        console.log("Current Query", query)
         cursor = await retail
         .find(query)
     } catch (e) {
@@ -47,6 +53,7 @@ export default class RetailDAO {
     }
 
     }
+
 
     static async addCinemaStock (cinema, items, stockRooms, dateAdded) {
         try {

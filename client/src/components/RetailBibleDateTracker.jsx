@@ -14,10 +14,12 @@ import DateAdapter from '@mui/lab/AdapterMoment';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import OutlinedInput from '@mui/material/OutlinedInput';
+
 
 function RetailBibleDateTracker (props) {
     let items = []
-    const columns = ["Item", "expDate", "Over Counter Qty", "Adjustments Qty", "Closing Qty", "Wastage Qty", "Opening Qty", "Stock Location"]
+    const columns = ["Item", "expDate", "Stock Location"]
     if (props.itemFocus) {
       items = props.items.filter(i => (new Date(i.expDate[1]) - new Date() < 1810000000))
 
@@ -26,13 +28,14 @@ function RetailBibleDateTracker (props) {
     }
 
     return <div>
+    {props.itemFocus ? <h1>Short dates</h1> : <h1>Full stock list</h1>}
     <TableContainer component={Paper} sx={{maxHeight: 440}}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Date Tracking</TableCell>
             {columns.map((header, i) => {
-              return <TableCell align="right" key={i + header}>{header}</TableCell>
+              return <TableCell align="left" key={i + header}>{header}</TableCell>
             })}
           </TableRow>
         </TableHead>
@@ -61,7 +64,7 @@ function RetailBibleDateTracker (props) {
               let cell
               try {
                   if (col === "expDate"){
-                      return <TableCell key={col + row.Item}>
+                      return <TableCell align="left" key={col + row.Item}>
                             <LocalizationProvider dateAdapter={DateAdapter} >
                             <MobileDatePicker
                             label="Exp Date"
@@ -77,13 +80,13 @@ function RetailBibleDateTracker (props) {
                             </LocalizationProvider>
                             </TableCell>
                   } else if ( !props.itemFocus && col === "Stock Location"){
-                    return <TableCell align="right" key={col + row.Item}>
+                    return <TableCell align="left" key={col + row.Item}>
                             <InputLabel id="demo-simple-select-label">Location</InputLabel>
                               <Select
                                 labelId="simple-select-label"
                                 id="Store Location Handler"
                                 value={row[col]}
-                                label="Store Location"
+                                input={<OutlinedInput label="Store Location" />}
                                 onChange={e => {
                                   e.preventDefault();
                                   const tempStock = items
@@ -106,7 +109,7 @@ function RetailBibleDateTracker (props) {
                   console.log(`error in creating expDate: ${e}`)
               }
               
-                  return <TableCell align='right' key={col + row.Item}>{cell}</TableCell>
+                  return <TableCell align='left' key={col + row.Item}>{cell}</TableCell>
               })}</TableRow>
 
               }

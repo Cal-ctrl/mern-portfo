@@ -9,7 +9,10 @@ export default class RetailController{
         let filters = {}
         if (req.query.name) {
             filters.name = req.query.name
+        } else {
+            filters = {...req.query}
         }
+        console.log(`Filters current set from req: `, filters)
 
         
 
