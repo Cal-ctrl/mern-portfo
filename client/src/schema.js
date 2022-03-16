@@ -31,6 +31,7 @@ const schema = {
     currentMenu:true,
     type: "",
     imgURL: "",
+    caloriesPerServe: 0,
     dateAdded: "",
     restaurant: "",
     ingredients:"",

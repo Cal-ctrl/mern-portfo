@@ -68,9 +68,15 @@ function FilterOptions(props) {
 
   }
 
+
   function handlesetFilter(e, check) {
     setFilters(preState => {
       preState[[e.target.name]] = (check ? e.target.checked : e.target.value)
+
+      if (preState[[e.target.name]] === false) {
+        delete preState[[e.target.name]]
+      }
+
       return {...preState}
     })
   }

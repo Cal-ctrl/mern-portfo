@@ -3,12 +3,11 @@ import AllergyDataService from "../services/allergy";
 import schema from '../schema';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { Container, Switch } from '@mui/material';
+import { Container, Switch, OutlinedInput, InputAdornment, FormHelperText, FormControl } from '@mui/material';
 import DietForm from './DietForm';
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Box } from '@mui/system';
-
 
 
 function AddFood(props) {
@@ -147,7 +146,20 @@ function AddFood(props) {
   <DietForm newDietInfo={newFoodItem.diets} onChange={handleDietChange} />
   <Form.Label><h5>Ingredients</h5></Form.Label>
   <Form.Control onChange={handleChange} as="textarea" rows={3} placeholder="Paste ingredients here" name="ingredients" value={newFoodItem.ingredients}/>
-
+  <FormControl sx={{ mt: 2, width: '25ch' }} variant="outlined">
+          <OutlinedInput
+            id="outlined-adornment-weight"
+            value={newFoodItem.caloriesPerServe}
+            name="caloriesPerServe"
+            onChange={handleChange}
+            endAdornment={<InputAdornment position="end">kcal</InputAdornment>}
+            aria-describedby="outlined-calorie-helper-text"
+            inputProps={{
+              'aria-label': 'calories',
+            }}
+          />
+          <FormHelperText id="outlined-weight-helper-text">Calories per Serving</FormHelperText>
+        </FormControl>
   <h5>Menu Information</h5>
   <Form.Group >
   <Form.Select onChange={handleChange} name="type" value={newFoodItem.type}>  

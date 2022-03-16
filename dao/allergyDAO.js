@@ -96,7 +96,7 @@ export default class AllergyDAO {
 
     }
 
-    static async updateFood (id, name, dietry, allergen, currentMenu, type, dateAdded, ingredients, restaurant) {
+    static async updateFood (id, name, dietry, allergen, currentMenu, type, dateAdded, ingredients, restaurant, caloriesPerServe) {
         try {
             const updateFood = await allergy.updateOne(
                 {_id: ObjectId(id)}, 
@@ -109,6 +109,8 @@ export default class AllergyDAO {
                     dateAdded: dateAdded,
                     ingredients: ingredients,
                     restaurant: restaurant,
+                    caloriesPerServe: caloriesPerServe,
+
                             }
                     })
                     return updateFood

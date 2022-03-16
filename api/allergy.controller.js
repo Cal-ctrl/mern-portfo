@@ -40,6 +40,8 @@ export default class AllergyController{
      const dateAdded = new Date()
      const ingredients = req.body.ingredients
      const restaurant = req.body.restaurant
+     const caloriesPerServe = req.body.caloriesPerServe
+
 
      const foodCreate = await AllergyDAO.addFood(
          allergyName,
@@ -50,6 +52,7 @@ export default class AllergyController{
          dateAdded,
          ingredients,
          restaurant,
+         caloriesPerServe,
      )
      console.log(foodCreate);
      res.json({status: `success`})
@@ -69,13 +72,17 @@ export default class AllergyController{
         const dateAdded = new Date()
         const ingredients = req.body.ingredients
         const restaurant = req.body.restaurant
-        const foodImage = req.file.originalname
-        if (foodImage !== null) {
+        const caloriesPerServe = req.body.caloriesPerServe
+        try {
+            const foodImage = req.file.originalname
             const allergyImageNameResponce = await AllergyDAO.updateFoodImage(
                 foodId,
                 foodImage,
             )
-        } else {
+        } catch(e) {
+            console.error(`No image uploaded`, e)
+        }
+
             const allergyResponce = await AllergyDAO.updateFood(
                 foodId,
                 allergyName,
@@ -86,10 +93,10 @@ export default class AllergyController{
                 dateAdded,
                 ingredients,
                 restaurant,
-    
+                caloriesPerServe,
             )
 
-        }
+    
 
         res.json({status: `success`})
 

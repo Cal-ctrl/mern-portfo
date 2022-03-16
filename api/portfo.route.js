@@ -14,8 +14,8 @@ const storage = multer.diskStorage({
     cb(null, './client/public/images/foodImgs')
   },
   filename: function (req, file, cb) {
-    const uniquesuffix = new Date.now() + Math.round(Math.random() * 1E9)
-    cb(null, file.originalname + uniquesuffix)
+    // const uniquesuffix = Math.round(Math.random() * 1E9)
+    cb(null, file.originalname)
   }
 })
 

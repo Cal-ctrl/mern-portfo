@@ -12,6 +12,7 @@ function MealInfo (props) {
         gap: 1,
         gridTemplateColumns: 'repeat(2, 1fr)',
       }
+      console.log(learnMore)
 
     return (
     <Container fluid>
@@ -22,7 +23,8 @@ function MealInfo (props) {
     <h3>Ingredients</h3>
     <p>{learnMore.ingredients ? learnMore.ingredients : "No Ingredients added for this item"}</p>
     </div>
-    <img src="https://www.cineworld.ie/static/dam/jcr:f44bd104-7cbe-419e-b4ee-c2245444cdd7/VIP_Desktop_Blog-Hero-Banner_620x300px.jpg" alt="meal-image" />
+    <img src={learnMore.foodImageName ? "/images/foodImgs/" + learnMore.foodImageName : "/images/vip.jpg"} alt="meal-image" />
+    <h3>Calories per Serving: {learnMore.caloriesPerServe || "to be confirmed"} </h3>
     </Box>
     <Box sx={style}>
     <AllergenLearnMore stateKey={false} info={learnMore.diets} />
