@@ -46,6 +46,42 @@ function RetailBibleNegativeTable (props) {
       return console.log("All CSV completed")
     }
 
+    function stockItemConvert(string) {
+      if (string.includes("DUB") && string.includes("Heineken")) {
+        return "Heineken Pint"
+      }
+      if (string.includes("IRE")) {
+        console.log(string)
+        //return "IRE"
+      }
+      if (string.includes("Halal Large")) {
+        return "Halal Hot Dog Large"
+      }
+      if (string.includes("Halal Regular")) {
+        return "Halal Hot Dog Regular"
+      }
+      if (string.includes("Veggie Regular")){
+        return "Hot Dog Veggie Regular"
+      }
+      if (string.includes("Veggie Large")) {
+        return ("Hot Dog Veggie Large")
+      }
+    }
+
+    function saleToStockLineCompare(sale, stockLine) {
+      //Compare Stock Line to Sale or vice versa 
+      if (stockLine.includes("Icee")){
+        // console.log(`Sale: ${sale}, stockLine: ${stockLine}`)
+        let category = stockLine.match(/-(\S*)\s/)
+        // console.log(`Category from regex: ${category[1]}`)
+        const stockName = stockLine.match(/\s(\S*)\s/)
+        // console.log(`Name from regex: ${stockName[1]}`)
+        if (sale.includes(category[1]) && sale.includes(stockName[1])) {
+          return true
+        }
+      }
+    }
+
 
     return (<div>
         <Button variant='primary lg' onClick={handleClick}>Download all as CSV</Button>
@@ -57,7 +93,7 @@ function RetailBibleNegativeTable (props) {
                 {props.columns.map((header, i) => {
                   return <TableCell align= {header === "Item" ? "left" : "right" }>{header}</TableCell>
                 })}
-                <TableCell>Till users mis ringing</TableCell>
+                <TableCell>Till users miss ringing</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -80,15 +116,16 @@ function RetailBibleNegativeTable (props) {
                             return
                           }
                           try {
-                            const stockItemConvert = row.Item.replace("UK-", "")
-                            if ( sale[14].includes(row.Item) || sale[14].includes(stockItemConvert) || sale[14].includes("IRE") ) {
+                            const stockItemAlt = row.Item.replace("UK-", "")
+                            const negativeItemToSaleConvert = stockItemConvert(row.Item)
+                            if ( sale[14].includes(row.Item) || sale[14].includes(stockItemAlt) || sale[14].includes(negativeItemToSaleConvert) || saleToStockLineCompare(sale[14], row.Item) ) {
                               sellingCsv[sellingCsv.length - 1] = {...sellingCsv[sellingCsv.length - 1], [`Sale ${salesTrack}`]: sale[15] + " " + sale[16]}                    
                               !fields.includes(`Sale ${salesTrack}`) && fields.push(`Sale ${salesTrack}`)
                               salesTrack += 1
                               return <TableCell>{sale[15]} {sale[16]}</TableCell>
                           } 
                           } catch (e) {
-                            console.log(`Error in matching sale product to negative`,e)
+                            console.log(`Error in matching sale product to negative`,e. sale)
                           }
                           
                         })}
@@ -131,8 +168,8 @@ function RetailBibleNegativeTable (props) {
                             return
                           }
                           try {
-                            const stockItemConvert = row.Item.replace("UK-", "").replace(" Postmix", "")
-                            if ( wasteItem[29].includes(row.Item) || wasteItem[29].includes(stockItemConvert)) {
+                            const stockItemAlt = row.Item.replace("UK-", "").replace(" Postmix", "")
+                            if ( wasteItem[29].includes(row.Item) || wasteItem[29].includes(stockItemAlt) || wasteItem[29].includes("Heineken Pint")) {
                               wasteCsv[wasteCsv.length - 1] = {...wasteCsv[wasteCsv.length - 1], [`Wastage Error ${wasteTrack}`]: wasteItem[30] + " " + wasteItem[37]}                    
                               !fields.includes(`Wastage Error ${wasteTrack}`) && fields.push(`Wastage Error ${wasteTrack}`)
                               wasteTrack += 1  

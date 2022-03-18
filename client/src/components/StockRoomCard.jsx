@@ -50,7 +50,7 @@ function StockRoomCard (props) {
         />
         <CardMedia
           component="img"
-          height="350"
+          // height=0
           width="100%"
           image={props.room.img} 
           alt="Room Layout"
