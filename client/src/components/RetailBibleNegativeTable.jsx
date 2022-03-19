@@ -15,7 +15,17 @@ function RetailBibleNegativeTable (props) {
   const prevCsv = []
   const miscCsv = []
   let fields = []
-  const recipeItems = ["BR Ice Cream All Flavours", "BR Cold Toppings Components", "BR Hot Toppings Components", "UK-Pick n Mix", "UK-Jimmys Weaver Gold Corn 22.68kg"]
+  const recipeItems = [
+    "BR Ice Cream All Flavours",
+    "BR Cold Toppings Components",
+    "BR Hot Toppings Components",
+    "UK-Pick n Mix",
+    "UK-Jimmys Weaver Gold Corn 22.68kg",
+    "UK-Reusable Face Mask Black",
+    "Generic Gift Box Activate",
+    "Generic Gift Box Retail Activate",
+    "Generic Gift Box Ticket Activate",
+    "UK-Jimmys Rapeseed Oil Drum 20lt"]
 
   function addFields(row) {
     const errors = ["Miss Ringing", "Wastage Error", "Previous Week", "Recipe Error"]
@@ -52,7 +62,7 @@ function RetailBibleNegativeTable (props) {
       }
       if (string.includes("IRE")) {
         console.log(string)
-        //return "IRE"
+        return "IRE"
       }
       if (string.includes("Halal Large")) {
         return "Halal Hot Dog Large"
@@ -79,6 +89,10 @@ function RetailBibleNegativeTable (props) {
         if (sale.includes(category[1]) && sale.includes(stockName[1])) {
           return true
         }
+      }
+
+      if (stockLine.includes("Sugar") && sale.includes("SitePopped") && sale.includes("Sweet")) {
+        return true
       }
     }
 
