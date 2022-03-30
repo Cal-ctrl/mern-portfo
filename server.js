@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import projects from "./api/portfo.route.js";
 import path from "path";
+import { main } from "./email.js"
 // import { URL } from 'url'; // in Browser, the URL in native accessible on window
 // const __dirname = new URL('.', import.meta.url).pathname;
 
@@ -32,6 +33,7 @@ app.get("/snake", function(req, res) {
 
         
     } 
+
 
 
 

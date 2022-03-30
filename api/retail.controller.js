@@ -46,7 +46,7 @@ export default class RetailController{
 
     static async apiUpdateRetail(req, res, next) {
         
-        const id = req.body.id
+        const id = req.body._id
         const cinema =  req.body.cinema
         const items = req.body.items
         const stockRooms = req.body.stockRooms

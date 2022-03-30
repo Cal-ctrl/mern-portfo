@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 import RetailDataService from "../services/retail.js";
 import RetailBibleDateTracker from './RetailBibleDateTracker.jsx';
 import RetailBibleStockRooms from './RetailBibleStockRooms.jsx';
+import RetailBibleAddItemForm from "./RetailBibleAddItemForm";
 
 function RetailBibleLiveStockHandle(props) {
     const [cinemaRetail, setCinemaRetail] = useState()
@@ -75,7 +76,10 @@ function RetailBibleLiveStockHandle(props) {
       <RetailBibleDateTracker items={items} setItems={setItems}  itemFocus={true}/>
 
       </Box>
-
+      <br />
+      <Container>
+      {cinemaRetail && <RetailBibleAddItemForm cinemaRetail={cinemaRetail} setCinemaRetail={setCinemaRetail}/>}
+      </Container>
       <br />
       </Container>
     )

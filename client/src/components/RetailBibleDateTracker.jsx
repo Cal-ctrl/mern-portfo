@@ -13,12 +13,15 @@ import MobileDatePicker from '@mui/lab/MobileDatePicker';
 import DateAdapter from '@mui/lab/AdapterMoment';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import "moment/locale/en-gb";
+import moment from "moment";
 
+moment.locale("en-gb");
 
 function RetailBibleDateTracker (props) {
     let items = []
+    const locale = "en-gb"
     const columns = ["Item", "expDate", "Stock Location"]
     if (props.itemFocus) {
       items = props.items.filter(i => (new Date(i.expDate[1]) - new Date() < 1810000000))
@@ -65,8 +68,9 @@ function RetailBibleDateTracker (props) {
               try {
                   if (col === "expDate"){
                       return <TableCell align="left" key={col + row.Item}>
-                            <LocalizationProvider dateAdapter={DateAdapter} >
+                            <LocalizationProvider dateAdapter={DateAdapter} locale={locale} >
                             <MobileDatePicker
+                            mask="__/__/____"
                             label="Exp Date"
                             value={row[col][1]}
                             onChange={(newDate) => {
@@ -81,9 +85,9 @@ function RetailBibleDateTracker (props) {
                             </TableCell>
                   } else if ( !props.itemFocus && col === "Stock Location"){
                     return <TableCell align="left" key={col + row.Item}>
-                            <InputLabel id="demo-simple-select-label">Location</InputLabel>
-                              <Select
-                                labelId="simple-select-label"
+                              <TextField
+                              select
+                                label="Location"
                                 id="Store Location Handler"
                                 value={row[col]}
                                 input={<OutlinedInput label="Store Location" />}
@@ -99,7 +103,7 @@ function RetailBibleDateTracker (props) {
                                 {props.stockRooms.map((room, i) =>{
                                   return <MenuItem value={room.name} key={room + i}>{room.name}</MenuItem>
                                 })}
-                              </Select>
+                              </TextField>
                     </TableCell>
 
                   } else {
@@ -118,6 +122,7 @@ function RetailBibleDateTracker (props) {
         </TableBody>
     </Table>
   </TableContainer>
+
   </div>
 }
 
