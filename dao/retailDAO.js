@@ -136,7 +136,7 @@ export default class RetailDAO {
             
             const itemsToCheck = retailList[1].items
             itemsToCheck.forEach(element => {
-                const itemDate = new Date(element.expDate[1])
+                const itemDate = new Date(element.expDate[0])
                 // console.log(`item Date: ${itemDate}`) //Debug Line 
                 if (itemDate < today || itemDate < futurePeriod) {
                     // console.log(`item is out of date: ${element.Item}`) //Debug Line
