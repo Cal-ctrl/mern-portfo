@@ -71,7 +71,8 @@ export default class RetailDAO {
             }
         }
 
-        static async updateRetail (id, cinema, items, stockRooms, dateAdded) {
+        static async updateRetail (id, cinema, items, stockRooms) {
+            console.log(`id in update: ${id}, cinema: ${cinema}`)
             try {
                 const updateRetail = await retail.updateOne(
                     {_id: ObjectId(id)}, 
@@ -79,14 +80,13 @@ export default class RetailDAO {
                         cinema: cinema,
                         items: items,
                         stockRooms: stockRooms,
-                        dateAdded: dateAdded
+                        dateAdded: new Date(),
                                 }
                         })
                         return updateRetail
             } catch(e) {
                 console.error(`unable to update document: ${e}`)
                 return {error: e}
-    
             }
         }
 
@@ -134,7 +134,7 @@ export default class RetailDAO {
             const today = new Date()
             const futurePeriod = new Date() + 1814400000
             
-            const itemsToCheck = retailList[1].items
+            const itemsToCheck = retailList[0].items
             itemsToCheck.forEach(element => {
                 const itemDate = new Date(element.expDate[0])
                 // console.log(`item Date: ${itemDate}`) //Debug Line 

@@ -164,14 +164,14 @@ function RetailBibleUploads () {
       {/* <Button onClick={handleClick} variant='outlined'>Submit Retail Items</Button> */}
       </Container>
 
-      <Container maxWidth="xl" disableGutters>
+{ csv.length !== 0 && <Container maxWidth="xl" disableGutters>
       <h1>Scannables</h1>
       <RetailBibleScannableTable csv={csv} columns={columns}/>
       <h1>Negatives</h1>
       <RetailBibleNegativeTable csv={csv} columns={columns} sales={sales} waste={waste} />
       <h1>Forecast</h1>
       <RetailBibleForecastTable csv={csv} columns={columns} />
-      </Container>
+      </Container>}
 
 </div>
 

@@ -21,7 +21,7 @@ function RetailBible() {
   return (
     <div> 
     <RetailBibleHeader />
-    {isAuthenticated && <RetailBibleLiveStockHandle email={user.email} />}
+    {isAuthenticated && <RetailBibleLiveStockHandle email={user.email} user={user.name}/>}
     <RetailBibleUploads />
     </div>
   );

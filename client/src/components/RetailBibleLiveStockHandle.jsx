@@ -44,6 +44,7 @@ function RetailBibleLiveStockHandle(props) {
 
     function updateDateTracker (){
         items.forEach( i => delete i["Item Class"])
+        console.log(`ID for updated Item ${cinemaRetail._id}`)
         const updateObject = {
             id:cinemaRetail._id,
             cinema: cinemaRetail.cinema,
@@ -61,6 +62,7 @@ function RetailBibleLiveStockHandle(props) {
   
     return (
       <Container maxWidth="xl" disableGutters>
+      {props.user === "Callum McNeil" && <h2>Insert database picker here</h2>}
       <h2 className="header">Stock Rooms</h2>
       <RetailBibleStockRooms stockRooms={stockRooms} setStockRooms={setStockRooms} items={items} />
       <br />
