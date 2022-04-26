@@ -102,21 +102,10 @@ export default class RetailDAO {
             }
         }
 
-        static async getShortDates({
-            filters = null,
-            page = 0,
-            } = {}) {
+        static async getShortDates(filters){
             let query = {}
-            if (filters) {
-            if ("name" in filters) {
-                query = {$text: {$search: filters["name"]} } 
-            } else if ("id" in filters) {
-                // console.log(filters)
-                query = {_id: ObjectId(filters.id)}
-            } else {
-                query = filters
-            }
-          }
+            query.email = filters.email
+            
         let cursor
     
         try {
@@ -136,9 +125,9 @@ export default class RetailDAO {
             
             const itemsToCheck = retailList[0].items
             itemsToCheck.forEach(element => {
-                const itemDate = new Date(element.expDate[0])
+                const itemDate = new Date(element.expDate[1])
                 // console.log(`item Date: ${itemDate}`) //Debug Line 
-                if (itemDate < today || itemDate < futurePeriod) {
+                if (element.expDate[0] && itemDate < today || itemDate < futurePeriod) {
                     // console.log(`item is out of date: ${element.Item}`) //Debug Line
                     const htmlRow = "<tr><td>" + element.Item + "</td><td>" + itemDate.toDateString() + "</td><td>" + element["Stock Location"] + "</td></tr>"
                     htmlTable += htmlRow

@@ -37,7 +37,7 @@ MongoClient.connect(
         { priority: "high", concurrency: 10 },
         async (job) => {
           const { to } = job.attrs.data;
-          const shortDates = await RetailDAO.getShortDates({email: "callum.mcneil89@gmail.com"})
+          const shortDates = await RetailDAO.getShortDates({email: "sheffield.cineworld@gmail.com"})
           console.log(`short dates array = ${shortDates}`)
           const testDate = shortDates || "Test if date req fails"
           await main(to, testDate);
@@ -46,7 +46,7 @@ MongoClient.connect(
       
       (async function () {
         await agenda.start();
-        await agenda.every("3 days", "send email report", {
+        await agenda.every("* * * /3 * *", "send email report", {
           to: "callum-mcneil@hotmail.com",
         });
       })();

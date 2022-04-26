@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,12 +6,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { TextField } from "@mui/material";
+import { TextField, Icon } from "@mui/material";
 import Checkbox from '@mui/material/Checkbox';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import MobileDatePicker from '@mui/lab/MobileDatePicker';
 import DateAdapter from '@mui/lab/AdapterMoment';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import "moment/locale/en-gb";
@@ -23,12 +22,23 @@ function RetailBibleDateTracker (props) {
     let items = []
     const locale = "en-gb"
     const columns = ["Item", "expDate", "Stock Location"]
+    const [filterItem, setFilterItem] = useState([])
+
     if (props.itemFocus) {
       items = props.items.filter(i => (new Date(i.expDate[1]) - new Date() < 1810000000))
 
     } else {
       items = props.items
+      // setFilterItem(props.items)
     }
+
+    useEffect(() => {
+      setFilterItem(props.items);
+    }, [])
+
+    
+
+
 
     return <div>
     {props.itemFocus ? <h1>Short dates</h1> : <h1>Full stock list</h1>}
@@ -45,11 +55,11 @@ function RetailBibleDateTracker (props) {
         <TableBody>
         {items.map((row, i) => {
           const itemDate = new Date(row.expDate[1]) - new Date()
-            if (row.expDate[0]){
+            if (row.expDate[0] && !row.Item.includes("UK-BR")){
               !row["Stock Location"] && (items[i]["Stock Location"] = "Hendersons");
                 return <TableRow
             key={row.Item + i}
-            sx={{ '&:last-child td, &:last-child th': { border: 0 }, bgcolor : (itemDate < 1810000000 ? "#FDA65D" : "#DBD0C0")}}
+            sx={{ '&:last-child td, &:last-child th': { border: 0 }, bgcolor : (itemDate < 1810000000 ? itemDate < 0 && "#FA564B" || "#FDA65D"   : "#DBD0C0")}}
           ><TableCell padding="checkbox">
               <Checkbox
                 color="primary"
