@@ -9,6 +9,7 @@ import Home from "./Pages/Home"
 import Contact from './Pages/Contact';
 import ProjectPage from "./Pages/ProjectPage"
 import AllergenPage from './Pages/AllergenPage';
+import BlogPage from "./Pages/BlogPage"
 import AddFood from './addFood';
 import MealInfo from './MealInfo';
 import Footer from "./Footer"
@@ -22,7 +23,7 @@ function App() {
 
     <Header />
     <Switch>
-    <Route path="/blog" />
+    <Route path="/blog" component={BlogPage} />
     <Route path="/contact" component={Contact} />
     <Route path="/projects" component={ProjectPage} />
     <Route path="/allergen/add" component={AddFood} />

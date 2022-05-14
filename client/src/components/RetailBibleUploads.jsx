@@ -168,7 +168,7 @@ function RetailBibleUploads () {
       <h1>Scannables</h1>
       <RetailBibleScannableTable csv={csv} columns={columns}/>
       <h1>Negatives</h1>
-      <RetailBibleNegativeTable csv={csv} columns={columns} sales={sales} waste={waste} />
+      <RetailBibleNegativeTable csv={csv} sales={sales} waste={waste} />
       <h1>Forecast</h1>
       <RetailBibleForecastTable csv={csv} columns={columns} />
       </Container>}

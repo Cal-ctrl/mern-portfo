@@ -15,6 +15,8 @@ function RetailBibleNegativeTable (props) {
   const prevCsv = []
   const miscCsv = []
   let fields = []
+  const columns = ["Item", "Over Counter Qty", "Closing Qty", "Wastage Qty"]
+
   const recipeItems = [
     "BR Ice Cream All Flavours",
     "BR Cold Toppings Components",
@@ -60,6 +62,9 @@ function RetailBibleNegativeTable (props) {
       if (string.includes("DUB") && string.includes("Heineken")) {
         return "Heineken Pint"
       }
+      if (string.includes("Draft") && string.includes("Miguel")) {
+        return "San Miguel Pint"
+      }
       if (string.includes("IRE")) {
         console.log(string)
         return "IRE"
@@ -76,6 +81,13 @@ function RetailBibleNegativeTable (props) {
       if (string.includes("Veggie Large")) {
         return ("Hot Dog Veggie Large")
       }
+      if (string.includes("Da Luca")) {
+        return ("Da Luca")
+      }
+      if (string.includes("Tekena Merlot")) {
+        return ("Tekena Merlot")
+      }
+
     }
 
     function saleToStockLineCompare(sale, stockLine) {
@@ -104,7 +116,7 @@ function RetailBibleNegativeTable (props) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                {props.columns.map((header, i) => {
+                {columns.map((header, i) => {
                   return <TableCell align= {header === "Item" ? "left" : "right" }>{header}</TableCell>
                 })}
                 <TableCell>Till users miss ringing</TableCell>
@@ -122,11 +134,11 @@ function RetailBibleNegativeTable (props) {
                         key={row.Item + index}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                        {props.columns.map(col => {
+                        {columns.map(col => {
                             return <TableCell align= {col === "Item" ? "left" : "right" }>{row[col]}</TableCell>
                         })}
                         {props.sales.map((sale, i) => {
-                          if(sale[0] === null || row.Item === "UK-Spiderman No Way Home Cup") {
+                          if(sale[0] === null) {
                             return
                           }
                           try {
@@ -157,7 +169,7 @@ function RetailBibleNegativeTable (props) {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                {props.columns.map((header, i) => {
+                {columns.map((header, i) => {
                   return <TableCell align={header === "Item" ? "left" : "right" }>{header}</TableCell>
                 })}
                 <TableCell>Wastage errors</TableCell>
@@ -174,7 +186,7 @@ function RetailBibleNegativeTable (props) {
                         <TableRow
                         key={row.Item + i}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                        {props.columns.map(col => { 
+                        {columns.map(col => { 
                             return <TableCell align= {col === "Item" ? "left" : "right" } >{row[col]}</TableCell>
                         })}
                         {props.waste.map((wasteItem, i) => {
@@ -204,7 +216,7 @@ function RetailBibleNegativeTable (props) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                {props.columns.map((header, i) => {
+                {columns.map((header, i) => {
                   return <TableCell align= {header === "Item" ? "left" : "right" }>{header}</TableCell>
                 })}
               </TableRow>
@@ -217,7 +229,7 @@ function RetailBibleNegativeTable (props) {
                       return (<TableRow
                                 key={row.Item + i}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                {props.columns.map(col => {
+                                {columns.map(col => {
                                   return <TableCell align= {col === "Item" ? "left" : "right" }>{row[col]}</TableCell>
                                 })}
                               </TableRow>
@@ -230,7 +242,7 @@ function RetailBibleNegativeTable (props) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                {props.columns.map((header, i) => {
+                {columns.map((header, i) => {
                   return <TableCell align= {header === "Item" ? "left" : "right" }>{header}</TableCell>
                 })}
               </TableRow>
@@ -243,7 +255,7 @@ function RetailBibleNegativeTable (props) {
                     return (<TableRow
                                 key={row.Item + i}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                {props.columns.map(col => {
+                                {columns.map(col => {
                                   return <TableCell align= {col === "Item" ? "left" : "right" }>{row[col]}</TableCell>
                               })}
                               </TableRow>
