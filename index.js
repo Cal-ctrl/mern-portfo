@@ -7,6 +7,7 @@ import ContactDAO from "./dao/contactDAO.js"
 import RetailDAO from "./dao/retailDAO.js"
 import {Agenda} from "agenda"
 import { main } from "./email.js"
+import BlogDAO from "./dao/blogDAO.js"
 
 dotenv.config()
 
@@ -24,6 +25,7 @@ MongoClient.connect(
     await AllergyDAO.injectDB(client);
     await ContactDAO.injectDB(client);
     await RetailDAO.injectDB(client);
+    await BlogDAO.injectDB(client)
 
 
     app.listen(port, ()=> {
@@ -46,7 +48,7 @@ MongoClient.connect(
       
       (async function () {
         await agenda.start();
-        await agenda.every("* * * /3 * *", "send email report", {
+        await agenda.every("3 days", "send email report", {
           to: "callum-mcneil@hotmail.com",
         });
       })();

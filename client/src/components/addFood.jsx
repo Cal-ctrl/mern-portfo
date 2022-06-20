@@ -42,7 +42,7 @@ function AddFood(props) {
                 console.log(responce.data); },
                 error => {
                     console.error(`Error in api request for creating item: ${error}`)
-                    alert(`You may not have permission to create this item, please log in or contact the admin to request access`)
+                    // alert(`You may not have permission to create this item, please log in or contact the admin to request access`)
                 }
                 )
                 .catch(e => {

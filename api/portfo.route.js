@@ -3,6 +3,7 @@ import ProjectCtrl from "./projects.controller.js"
 import AllergyCtrl from "./allergy.controller.js" 
 import ContactCtrl from "./contact.controller.js"
 import RetailCtrl from "./retail.controller.js";
+import BlogCtrl from "./blog.controller.js";
 import { auth } from 'express-oauth2-jwt-bearer';
 import jwt from "express-jwt";
 import jwksRsa from "jwks-rsa";
@@ -20,6 +21,20 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({ storage: storage })
+
+const storageBlog = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './client/public/images')
+  },
+  filename: function (req, file, cb) {
+    // const uniquesuffix = Math.round(Math.random() * 1E9)
+    cb(null, file.originalname)
+  }
+})
+
+const uploadBlogImg = multer({ storage: storageBlog })
+
+
 
 const authorizeAccessToken = jwt({
     secret: jwksRsa.expressJwtSecret({
@@ -55,9 +70,9 @@ router
 
 router.route("/allergy")
     .get(AllergyCtrl.apiGetAllergyInfo)
-    .post(authorizeAccessToken, checkPermissions, AllergyCtrl.apiPostAllergyInfo) //Auth needed
-    .put(authorizeAccessToken, checkPermissions, upload.single("file"), AllergyCtrl.apiUpdateAllergyInfo) // Auth Needed
-    .delete(authorizeAccessToken, checkPermissions, AllergyCtrl.apiDeleteAllergyInfo) // Auth Needed 
+    .post(AllergyCtrl.apiPostAllergyInfo) //Auth needed
+    .put(upload.single("file"), AllergyCtrl.apiUpdateAllergyInfo) // Auth Needed
+    .delete(AllergyCtrl.apiDeleteAllergyInfo) // Auth Needed 
 
 router.route("/contact")
       .post(ContactCtrl.apiPostContactMessage)
@@ -67,6 +82,12 @@ router.route("/retail")
       .post(RetailCtrl.apiPostRetail)
       .put(RetailCtrl.apiUpdateRetail)
       .delete(RetailCtrl.apiDeleteRetailInfo)
+
+router.route("/blog")
+      .get(BlogCtrl.apiGetBlog)
+      .post(uploadBlogImg.single("blogImage"), BlogCtrl.apiPostBlog)
+      .put( BlogCtrl.apiUpdateBlog)
+      .delete(BlogCtrl.apiDeleteBlog)
 
 
 export default router;

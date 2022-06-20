@@ -82,6 +82,17 @@ function FoodCard (props) {
           currentFood: props.foodOb
         }
           }}>Learn More</Link>
+          <Link variant="button" className="btn btn-outline-primary btn-sm" to=""  onClick={(e) => {
+    e.preventDefault();
+    handleDelete(props.id)}}>Delete</Link>
+    <Link variant="button" className="btn btn-outline-primary btn-sm" to={{
+        pathname: "/allergen/" + props.id + "/add",
+        state: {
+              currentFood: props.foodOb
+            }
+          }}>Update</Link>
+
+        <Checkbox onChange={handleChange} size="small" checked={props.isChecked || false}/>
     {isAuthenticated && <div>
     <Link variant="button" className="btn btn-outline-primary btn-sm" to=""  onClick={(e) => {
     e.preventDefault();
