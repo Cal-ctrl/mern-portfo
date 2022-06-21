@@ -4,6 +4,7 @@ import AllergyCtrl from "./allergy.controller.js"
 import ContactCtrl from "./contact.controller.js"
 import RetailCtrl from "./retail.controller.js";
 import BlogCtrl from "./blog.controller.js";
+import MediaCtrl from "./media.controller.js";
 import { auth } from 'express-oauth2-jwt-bearer';
 import jwt from "express-jwt";
 import jwksRsa from "jwks-rsa";
@@ -88,6 +89,12 @@ router.route("/blog")
       .post(uploadBlogImg.single("blogImage"), BlogCtrl.apiPostBlog)
       .put( BlogCtrl.apiUpdateBlog)
       .delete(BlogCtrl.apiDeleteBlog)
+
+router.route("/media")
+      .get(MediaCtrl.apiGetMedia)
+      .post(MediaCtrl.apiPostMedia)
+      .put(MediaCtrl.apiUpdateMedia)
+      .delete(MediaCtrl.apiDeleteMedia)
 
 
 export default router;

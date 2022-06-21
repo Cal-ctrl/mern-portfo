@@ -8,6 +8,7 @@ import RetailDAO from "./dao/retailDAO.js"
 import {Agenda} from "agenda"
 import { main } from "./email.js"
 import BlogDAO from "./dao/blogDAO.js"
+import MediaDAO from "./dao/mediaDAO.js"
 
 dotenv.config()
 
@@ -25,7 +26,8 @@ MongoClient.connect(
     await AllergyDAO.injectDB(client);
     await ContactDAO.injectDB(client);
     await RetailDAO.injectDB(client);
-    await BlogDAO.injectDB(client)
+    await BlogDAO.injectDB(client);
+    await MediaDAO.injectDB(client);
 
 
     app.listen(port, ()=> {
